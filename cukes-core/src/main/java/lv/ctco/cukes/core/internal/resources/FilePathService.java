@@ -1,11 +1,12 @@
 package lv.ctco.cukes.core.internal.resources;
 
 import com.google.inject.Inject;
+
+import org.apache.commons.io.FilenameUtils;
+
 import lv.ctco.cukes.core.CukesOptions;
 import lv.ctco.cukes.core.internal.context.GlobalWorldFacade;
 import lv.ctco.cukes.core.internal.helpers.Files;
-
-import java.io.File;
 
 public class FilePathService {
 
@@ -16,8 +17,8 @@ public class FilePathService {
         if (Files.isRelative(path)) {
             // TODO: Put correct RESOURCE_ROOT
             String resourceRoot = world.get(CukesOptions.RESOURCES_ROOT, "resources");
-            return new File(resourceRoot, path).getAbsolutePath();
+            return FilenameUtils.concat(resourceRoot, path);
         }
-        return new File(path).getAbsolutePath();
+        return path;
     }
 }
